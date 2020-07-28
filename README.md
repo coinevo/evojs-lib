@@ -1,37 +1,37 @@
-# qtumjs-lib
+# evojs-lib
 This is an extend lib for bitcoinjs-lib.
 It extends the network type of bitcoinjs-lib.
-It also provides an useful lib to help you building QTUM transactions.
+It also provides an useful lib to help you building EVO transactions.
 
 ## Installation
 ``` bash
-npm install qtumjs-lib
+npm install evojs-lib
 ```
 
 ## Setup
 ### Node.js
 ``` javascript
-var qtumjs = require('qtumjs-lib')
+var qtumjs = require('evojs-lib')
 ```
 
 ## New features
 ### Network
 ```
 {
-    qtum: {
-        messagePrefix: '\x18Qtum Signed Message:\n',
-        bech32: 'qc',
+    evo: {
+        messagePrefix: '\x18Evo Signed Message:\n',
+        bech32: 'ec',
         bip32: {
             public: 0x0488b21e,
             private: 0x0488ade4
         },
-        pubKeyHash: 0x3a,
-        scriptHash: 0x32,
+        pubKeyHash: 0x00,
+        scriptHash: 0x05,
         wif: 0x80
     },
-    qtum_testnet: {
-        messagePrefix: '\x18Qtum Signed Message:\n',
-        bech32: 'tq',
+    evo_testnet: {
+        messagePrefix: '\x18Coinevo Signed Message:\n',
+        bech32: 'te',
         bip32: {
             public: 0x043587cf,
             private: 0x04358394
@@ -48,12 +48,12 @@ var qtumjs = require('qtumjs-lib')
 #### Utils.selectTxs
 ```javascript
 /**
- * This is a function for selecting QTUM utxos to build transactions
- * the transaction object takes at least 3 fields, value(unit is 1e-8 QTUM) , confirmations and isStake
+ * This is a function for selecting EVO utxos to build transactions
+ * the transaction object takes at least 3 fields, value(unit is 1e-8 EVO) , confirmations and isStake
  *
  * @param [transaction] unspentTransactions
- * @param Number amount(unit: QTUM)
- * @param Number fee(unit: QTUM)
+ * @param Number amount(unit: EVO)
+ * @param Number fee(unit: EVO)
  * @returns [transaction]
  */
 function selectTxs(unspentTransactions, amount, fee)
@@ -62,12 +62,12 @@ function selectTxs(unspentTransactions, amount, fee)
 ```javascript
 /**
  * This is a helper function to build a pubkeyhash transaction
- * the transaction object takes at least 5 fields, value(unit is 1e-8 QTUM), confirmations, isStake, hash and pos
+ * the transaction object takes at least 5 fields, value(unit is 1e-8 EVO), confirmations, isStake, hash and pos
  *
  * @param bitcoinjs-lib.KeyPair keyPair
  * @param String to
- * @param Number amount(unit: QTUM)
- * @param Number fee(unit: QTUM)
+ * @param Number amount(unit: EVO)
+ * @param Number fee(unit: EVO)
  * @param [transaction] utxoList
  * @returns String the built tx
  */
@@ -77,13 +77,13 @@ function buildPubKeyHashTransaction(keyPair, to, amount, fee, utxoList)
 ```javascript
 /**
  * This is a helper function to build a create-contract transaction
- * the transaction object takes at least 5 fields, value(unit is 1e-8 QTUM), confirmations, isStake, hash and pos
+ * the transaction object takes at least 5 fields, value(unit is 1e-8 EVO), confirmations, isStake, hash and pos
  *
  * @param bitcoinjs-lib.KeyPair keyPair
  * @param String code The contract byte code
  * @param Number gasLimit
- * @param Number gasPrice(unit: 1e-8 QTUM/gas)
- * @param Number fee(unit: QTUM)
+ * @param Number gasPrice(unit: 1e-8 EVO/gas)
+ * @param Number fee(unit: EVO)
  * @param [transaction] utxoList
  * @returns String the built tx
  */
@@ -93,14 +93,14 @@ function buildCreateContractTransaction(keyPair, code, gasLimit, gasPrice, fee, 
 ```javascript
 /**
  * This is a helper function to build a send-to-contract transaction
- * the transaction object takes at least 5 fields, value(unit is 1e-8 QTUM), confirmations, isStake, hash and pos
+ * the transaction object takes at least 5 fields, value(unit is 1e-8 EVO), confirmations, isStake, hash and pos
  *
  * @param bitcoinjs-lib.KeyPair keyPair
  * @param String contractAddress The contract address
  * @param String encodedData The encoded abi data
  * @param Number gasLimit
- * @param Number gasPrice(unit: 1e-8 QTUM/gas)
- * @param Number fee(unit: QTUM)
+ * @param Number gasPrice(unit: 1e-8 EVO/gas)
+ * @param Number fee(unit: EVO)
  * @param [transaction] utxoList
  * @returns String the built tx
  */
